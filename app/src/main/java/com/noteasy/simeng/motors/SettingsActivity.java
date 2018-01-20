@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -49,7 +50,14 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putString("IP",editIP.getText().toString());
         editor.putString("UP",editUp.getText().toString());
         editor.apply();
+        Toast.makeText(this,"Saved!",Toast.LENGTH_LONG).show();
 
+    }
+    public void displayData(View view){
+        SharedPreferences sharedPref=getSharedPreferences("userInfo",Context.MODE_PRIVATE);
+
+        String IP=sharedPref.getString("IP","");
+        String up=sharedPref.getString("UP","");
     }
 
 }

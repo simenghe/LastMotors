@@ -24,6 +24,8 @@ import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity {
     SharedPreferences localPrefs;
+    EditText editIP=(EditText)findViewById(R.id.editIP);
+    EditText editUp=(EditText)findViewById(R.id.editUp);
     Button btnSend=(Button)findViewById(R.id.btnSend);
     Button btnSave=(Button)findViewById(R.id.btnSave);
     Button btnLoad= (Button)findViewById(R.id.btnLoad);
@@ -32,24 +34,22 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        localPrefs=this.getPreferences(Context.MODE_PRIVATE);
-        String savedFav=localPrefs.getString("Big Cane","Unknown");
-        TextView tv=(TextView) findViewById(R.id.testView);
-        tv.setText("My cane is: "+savedFav);
-
-
+            }
+        });
 
 
     }
-    private void storeData(){
-        SharedPreferences myAddress=getSharedPreferences("Addresses",MODE_PRIVATE);
-        SharedPreferences.Editor myEditor=myAddress.edit();
-        myEditor.putString("1","Test Works 1");
-        myEditor.apply();
+    public void saveInfo(View view){
+        SharedPreferences sharedPref=getSharedPreferences("userInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPref.edit();
+        editor.putString("IP",editIP.getText().toString());
+        editor.putString("UP",editUp.getText().toString());
+        editor.apply();
+
     }
-    private String getData(){
-        SharedPreferences myAddress=getSharedPreferences("Addresses",MODE_PRIVATE);
-        return myAddress.getString("1","Not easy");
-    }
+
 }

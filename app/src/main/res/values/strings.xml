@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MotorsApp</string>
+    <string name="btnSettings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="editIP">Enter your base address here. Include port</string>
+    <string name="editUp">/forward</string>
+    <string name="editDown">/backwards</string>
+    <string name="editRight">/right</string>
+    <string name="editLeft">/left</string>
+    <string name="editHand">/hands</string>
+    <string name="editExtra">/extra</string>
+    <string name="txtStick">Returns:</string>
+    <string name="urlText">urlText</string>
+    <string name="btnSend">SEND DATA</string>
+    <string name="btnTest">Update List</string>
+    <string name="btnSave">SAVE</string>
+</resources>

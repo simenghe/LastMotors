@@ -64,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.apply();
             }
         });
+        //Goat
         btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

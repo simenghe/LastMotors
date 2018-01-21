@@ -9,15 +9,14 @@
 
 
     <GridLayout
-        android:layout_width="689dp"
-        android:layout_height="387dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -110,10 +109,11 @@
             android:layout_height="wrap_content"
             android:layout_column="2"
             android:layout_row="0"
+            android:onClick="saveInfo"
             android:text="@string/btnSave" />
 
         <TextView
-            android:id="@+id/testView"
+            android:id="@+id/txtText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -126,6 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_column="3"
             android:layout_row="0"
+            android:onClick="displayData"
             android:text="Load" />
 
     </GridLayout>

@@ -81,10 +81,6 @@ public class MainActivity extends AppCompatActivity {
         Button btnJoy=(Button) findViewById(R.id.btnJoy);
         final Joystick buggoStick=(Joystick)findViewById(R.id.buggoStick);
         //Collect the data
-        if(getIntent().hasExtra("Addresses")){
-            addresses=getIntent().getExtras().getStringArray("Addresses");
-            urlText.setText(addresses[2]);
-        }
         //Change to other activity
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override

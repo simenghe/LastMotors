@@ -37,9 +37,8 @@ public class SettingsActivity extends AppCompatActivity {
     public EditText[] addressEdits;
     String[] defaultAddresses = new String[]{"http://192.168.0.107:1234", "/forward", "/backward", "/right", "/left", "/hands", "/extras"};
     TextView txtTest;
-    List<String> list;
+    String[] list;
 
-    //public static String[] collectedAddresses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +49,19 @@ public class SettingsActivity extends AppCompatActivity {
         txtTest = (TextView) findViewById(R.id.txtText);
         //Take from all the needed editTexts.
         addressEdits = new EditText[]{findViewById(R.id.editIP), findViewById(R.id.editUp), findViewById(R.id.editDown), findViewById(R.id.editRight), findViewById(R.id.editLeft), findViewById(R.id.editHand), findViewById(R.id.editExtra)};
-        list = new ArrayList<>(); //get list
+        list = new String[addressEdits.length];
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 isSaved = true;
                 for (int i = 0; i < addressEdits.length; i++) {
                     if (addressEdits[i].getText().toString().length() == 0) {
-                        list.add(defaultAddresses[i]);
+                        //list.add(defaultAddresses[i]);
+                        list[i] = defaultAddresses[i];
                     } else {
-                        list.add(addressEdits[i].getText().toString());
+                        //list.add(addressEdits[i].getText().toString());
+                        list[i] = new String(addressEdits[i].getText().toString());
                     }
                 }
                 StringBuilder sb = new StringBuilder();
@@ -70,6 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences settings = getSharedPreferences("PREFS", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("list", sb.toString());
+                editor.putBoolean("isSaved", isSaved);
                 editor.apply();
             }
         });
@@ -90,8 +93,9 @@ public class SettingsActivity extends AppCompatActivity {
         btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isSaved) {
-                    SharedPreferences settings = getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+                SharedPreferences settings = getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+                boolean saved = settings.getBoolean("isSaved", false);
+                if (isSaved || saved) {
                     String wordString = settings.getString("list", "");
                     collectedAddresses = wordString.split(",");
                     if (!IsNull(collectedAddresses)) {
@@ -103,7 +107,6 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "The addresses are not setup.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         txtTest = (TextView) findViewById(R.id.txtText);
         //Take from all the needed editTexts.
         addressEdits = new EditText[]{findViewById(R.id.editIP), findViewById(R.id.editUp), findViewById(R.id.editDown), findViewById(R.id.editRight), findViewById(R.id.editLeft), findViewById(R.id.editHand), findViewById(R.id.editExtra)};
-        list = new ArrayList<>();
+        list = new ArrayList<>(); //get list
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

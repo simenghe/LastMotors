@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent().hasExtra("Addresses")){
             addresses=getIntent().getExtras().getStringArray("Addresses");
             System.out.println(addresses[0]+"is your base addresss");
-            urlText.setText("Base address="+ addresses[0]);
+            Toast.makeText(getApplicationContext(),"Base address="+ addresses[0],Toast.LENGTH_SHORT).show();
         }
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override

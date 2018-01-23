@@ -53,16 +53,18 @@ public class SettingsActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                boolean valuesReset=false;
                 isSaved = true;
                 for (int i = 0; i < addressEdits.length; i++) {
                     if (addressEdits[i].getText().toString().length() == 0) {
-                        //list.add(defaultAddresses[i]);
                         list[i] = defaultAddresses[i];
+                        valuesReset=true;
                     } else {
-                        //list.add(addressEdits[i].getText().toString());
                         list[i] = new String(addressEdits[i].getText().toString());
                     }
+                }
+                if(valuesReset){
+                    Toast.makeText(getApplicationContext(),"Some/All values were reset!",Toast.LENGTH_SHORT).show();
                 }
                 StringBuilder sb = new StringBuilder();
                 for (String s : list) {

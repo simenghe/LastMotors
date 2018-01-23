@@ -109,7 +109,6 @@
             android:layout_height="wrap_content"
             android:layout_column="2"
             android:layout_row="0"
-            android:onClick="saveInfo"
             android:text="@string/btnSave" />
 
         <TextView
@@ -126,7 +125,6 @@
             android:layout_height="wrap_content"
             android:layout_column="3"
             android:layout_row="0"
-            android:onClick="displayData"
             android:text="Load" />
 
     </GridLayout>

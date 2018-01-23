@@ -11,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.jmedeisis.bugstick.Joystick;
 import com.jmedeisis.bugstick.JoystickListener;
 import com.noteasy.simeng.motors.R;
@@ -82,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         final Joystick buggoStick=(Joystick)findViewById(R.id.buggoStick);
         //Collect the data
         //Change to other activity
+        if(getIntent().hasExtra("Addresses")){
+            addresses=getIntent().getExtras().getStringArray("Addresses");
+            System.out.println(addresses[0]+"is your base addresss");
+            urlText.setText("Base address="+ addresses[0]);
+        }
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

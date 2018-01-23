@@ -26,6 +26,7 @@ import java.util.List;
 
 
 public class SettingsActivity extends AppCompatActivity {
+    public static String[] collectedAddresses;
     EditText editIP;
     EditText editUp;
     Button btnSend;
@@ -64,20 +65,31 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.apply();
             }
         });
-        //Goat
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent changeIntent=new Intent(getApplicationContext(),MainActivity.class);
+                changeIntent.putExtra("Addresses",collectedAddresses);
+                startActivity(changeIntent);
+            }
+        });
         btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences settings=getSharedPreferences("PREFS",Context.MODE_PRIVATE);
                 String wordString=settings.getString("list","");
-                String[]itemsWords=wordString.split(",");
+                collectedAddresses=wordString.split(",");
+                for(int i=0; i<collectedAddresses.length;i++){
+                    System.out.println("Collected address"+i+collectedAddresses[i]);
+                }
+                /*String[]itemsWords=wordString.split(",");
                 List<String> items=new ArrayList<String>();
                 for(int i=0;i<itemsWords.length;i++){
                     items.add(itemsWords[i]);
                 }
                 for(int i=0; i<items.size();i++){
                     System.out.println(items.get(i));
-                }
+                }*/
             }
         });
     }

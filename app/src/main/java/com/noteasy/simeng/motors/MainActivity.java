@@ -24,10 +24,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
     private TextView urlText;
     public String [] addresses;
+    public static String baseAddress="http://10.145.145.140:5000/";//"http://10.145.158.52:1234/";
     float degrees;
     boolean forwardDomain=degrees<=135&&degrees>=45; //set all domains of the joystick.
     boolean backwardDomain=degrees<-45&&degrees>-135;
@@ -87,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent().hasExtra("Addresses")){
             addresses=getIntent().getExtras().getStringArray("Addresses");
             System.out.println(addresses[0]+"is your base addresss");
-            Toast.makeText(getApplicationContext(),"Base address="+ addresses[0],Toast.LENGTH_SHORT).show();
+            urlText.setText("Base address="+ addresses[0]);
+            baseAddress=addresses[0];
+            Toast.makeText(getApplicationContext(),"Base Address :"+baseAddress,Toast.LENGTH_SHORT).show();
         }
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,29 +107,27 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onDrag(float degrees, float offset) {
-                String baseAddress="http://10.145.158.52:1234/";
                 txtStick.setText("Degrees: "+degrees+"\nOffset:  "+offset);
                 System.out.println(GetDomain(degrees));
                 boolean changed=GetLevel(offset)!=curLevel;
                 boolean domainChanged=GetDomain(degrees)!=curDomain;
+                DecimalFormat df=new DecimalFormat("#.00");
+                String formattedOffset=df.format(offset*100);
                 if(changed||domainChanged){
                     curDomain=GetDomain(degrees);
                     if(curDomain==1){
                         curLevel=GetLevel(offset);
                         curDomain=1;
                         if(curLevel==3){
-                            //Go
-                            new JSONTask().execute(baseAddress+"stop");
-                            new JSONTask().execute("http://10.145.158.52:1234/stop");
+                            new JSONTask().execute(baseAddress+"forward");
                         }
                         if(curLevel==2){
                             //Slower
-                            new JSONTask().execute("http://10.145.158.52:1234/right");
+                            //new JSONTask().execute(baseAddress+"forward/"+formattedOffset);
                         }
                         if(curLevel==1){
                             //stop.
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
+                            //new JSONTask().execute(baseAddress+"forward/"+formattedOffset);
                         }
                     }
                     if((curDomain==2)){
@@ -133,17 +135,12 @@ public class MainActivity extends AppCompatActivity {
                         curLevel=GetLevel(offset);
                         if(curLevel==3){
                             //Go
-                            new JSONTask().execute(baseAddress+"left");
-                            new JSONTask().execute("http://10.145.158.52:1234/left");
                         }
                         if(curLevel==2){
                             //Slower
-                            new JSONTask().execute("http://10.145.158.52:1234/right");
                         }
                         if(curLevel==1){
                             //stop.
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
                         }
                     }
                     if((curDomain==3)){
@@ -151,17 +148,12 @@ public class MainActivity extends AppCompatActivity {
                         curLevel=GetLevel(offset);
                         if(curLevel==3){
                             //Go
-                            new JSONTask().execute(baseAddress+"forward");
-                            new JSONTask().execute("http://10.145.158.52:1234/forward");
                         }
                         if(curLevel==2){
                             //Slower
-                            new JSONTask().execute("http://10.145.158.52:1234/right");
                         }
                         if(curLevel==1){
                             //stop.
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
                         }
                     }
                     if((curDomain==4)){
@@ -169,17 +161,12 @@ public class MainActivity extends AppCompatActivity {
                         curLevel=GetLevel(offset);
                         if(curLevel==3){
                             //Go
-                            new JSONTask().execute(baseAddress+"lightOn");
-                            new JSONTask().execute("http://10.145.158.52:1234/lightOn");
                     }
                         if(curLevel==2){
                             //Slower
-                            new JSONTask().execute("http://10.145.158.52:1234/right");
                         }
                         if(curLevel==1){
                             //stop.
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
-                            new JSONTask().execute("http://10.145.158.52:1234/hands");
                         }
                     }
                 }
@@ -190,12 +177,10 @@ public class MainActivity extends AppCompatActivity {
                 txtStick.setText("Degrees: "+0+"\nOffset: "+0);
                 curLevel=0;
                 curDomain=0;
+                new JSONTask().execute(baseAddress+"forward/");
+                new JSONTask().execute(baseAddress+"forward/");
                 System.out.println("Relased domain: "+curDomain);
                 System.out.println("Current Offset: "+0+" Saved Offset: "+lastOffset+" Current Degree: "+0+" Saved Degree: "+lastDegree);
-                lastOffset=0;
-                lastDegree=0;
-                new JSONTask().execute("http://10.145.158.52:1234/hands");
-                new JSONTask().execute("http://10.145.158.52:1234/hands");
             }
         });
     }

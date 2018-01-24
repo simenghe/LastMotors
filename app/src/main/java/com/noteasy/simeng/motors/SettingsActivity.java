@@ -23,7 +23,6 @@ import java.io.IOError;
 
 
 public class SettingsActivity extends AppCompatActivity {
-
     public String[] collectedAddresses;
     public static boolean isSaved;
     public Toast toast;
@@ -36,7 +35,6 @@ public class SettingsActivity extends AppCompatActivity {
     String[] defaultAddresses = new String[]{"http://192.168.0.107:1234", "/forward", "/backward", "/right", "/left", "/hands", "/extras"};
     TextView txtTest;
     String[] list;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,6 @@ public class SettingsActivity extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSend);
         btnSave = (Button) findViewById(R.id.btnSave);
         btnLoad = (Button) findViewById(R.id.btnLoad);
-        txtTest = (TextView) findViewById(R.id.txtText);
         //Take from all the needed editTexts.
         addressEdits = new EditText[]{findViewById(R.id.editIP), findViewById(R.id.editUp), findViewById(R.id.editDown), findViewById(R.id.editRight), findViewById(R.id.editLeft), findViewById(R.id.editHand), findViewById(R.id.editExtra)};
         list = new String[addressEdits.length];
@@ -93,7 +90,6 @@ public class SettingsActivity extends AppCompatActivity {
                 } catch (IOError error) {
                     System.out.println("Error has occurred.");
                 }
-
             }
         });
         btnLoad.setOnClickListener(new View.OnClickListener() {

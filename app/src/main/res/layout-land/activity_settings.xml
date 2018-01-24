@@ -5,26 +5,9 @@
     android:id="@+id/LeftConstraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@mipmap/legendtech"
     tools:context="com.noteasy.simeng.motors.SettingsActivity">
 
-
-    <TextView
-        android:id="@+id/txtText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_row="1"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -47,9 +30,9 @@
             android:ems="10"
             android:hint="@string/editIP"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/background_dark"
-            android:textColorHighlight="@android:color/background_dark"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="218dp"
             tools:layout_editor_absoluteY="370dp" />
@@ -62,7 +45,11 @@
             android:layout_row="1"
             android:ems="10"
             android:hint="@string/editUp"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/black"
+            android:textColorHint="@android:color/white"
+            />
 
         <EditText
             android:id="@+id/editDown"
@@ -72,7 +59,12 @@
             android:layout_row="2"
             android:ems="10"
             android:hint="@string/editDown"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="182dp" />
 
         <EditText
             android:id="@+id/editRight"
@@ -82,7 +74,10 @@
             android:layout_row="3"
             android:ems="10"
             android:hint="@string/editRight"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editLeft"
@@ -92,7 +87,10 @@
             android:layout_row="4"
             android:ems="10"
             android:hint="@string/editLeft"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editHand"
@@ -102,7 +100,10 @@
             android:layout_row="5"
             android:ems="10"
             android:hint="@string/editHand"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editExtra"
@@ -112,7 +113,10 @@
             android:layout_row="6"
             android:ems="10"
             android:hint="@string/editExtra"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <Button
             android:id="@+id/btnSend"

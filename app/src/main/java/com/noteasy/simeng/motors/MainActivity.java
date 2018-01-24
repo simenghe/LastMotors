@@ -28,9 +28,15 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private TextView urlText;
     public String [] addresses;
-    //public static String baseAddress="http://10.145.145.140:5000/";
+    public String baseAddress="http://10.145.145.140:5000";
+    public String forward="/forward";
+    public String backward="/backward";
+    public String right="/right";
+    public String left="/left";
+    public String stop="/stop";
+    public String hands="/hands";
     //public static String baseAddress="http://10.145.158.52:1234/";
-    public String baseAddress="http://192.168.0.100:1234/";
+    //public String baseAddress="http://192.168.0.100:1234/";
     float offSetMax=0.75f;
     float offSetMid=0.5f;
     float offSetLow=0.25f;
@@ -51,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public int GetDomain(float degrees){
-        //Return 1=UP,2=DOWN,3=LEFT,4=RIGHTs
+        //Return 1=UP,2=DOWN,3=LEFT,4=RIGHT
         if(degrees<=135&&degrees>=45){
             return 1;
         }
@@ -74,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         urlText=(TextView)findViewById(R.id.urlText);
+        Button btnKitty=(Button) findViewById(R.id.btnKitty);
+        Button btnRestart=(Button)findViewById(R.id.btnRestart);
         final TextView txtStick=(TextView) findViewById(R.id.txtStick);
         Button btnSettings=(Button)findViewById(R.id.btnSettings);
         Button btnJoy=(Button) findViewById(R.id.btnJoy);
@@ -97,6 +105,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(startIntent);
             }
         });
+        btnKitty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new JSONTask().execute(baseAddress+forward);
+            }
+        });
+        btnRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recreate();
+            }
+        });
+
+
         buggoStick.setJoystickListener(new JoystickListener() {
             @Override
             public void onDown() {
@@ -114,41 +136,49 @@ public class MainActivity extends AppCompatActivity {
                         curLevel=GetLevel(offset);
                         curDomain=1;
                         if(curLevel==3){
-                            new JSONTask().execute(baseAddress+"forward");
+                            System.out.println(baseAddress+forward);
+                            new JSONTask().execute(baseAddress+forward);
+                            new JSONTask().execute(baseAddress+forward);
+
                         }
                         if(curLevel==2){
-                            //Slower
-                            //new JSONTask().execute(baseAddress+"forward/"+formattedOffset);
+                            new JSONTask().execute(baseAddress+forward+"/slow");
                         }
                         if(curLevel==1){
                             //stop.
-                            new JSONTask().execute(baseAddress+"stop");
+                            new JSONTask().execute(baseAddress+stop);
                         }
                     }
                     if((curDomain==2)){
                         curDomain=2;
                         curLevel=GetLevel(offset);
                         if(curLevel==3){
-                            //Go
+                            new JSONTask().execute(baseAddress+backward);
+                            new JSONTask().execute(baseAddress+backward);
                         }
                         if(curLevel==2){
-                            //Slower
+                            new JSONTask().execute(baseAddress+backward);
                         }
                         if(curLevel==1){
-                            //stop.
+                            new JSONTask().execute(baseAddress+stop);
+                            new JSONTask().execute(baseAddress+stop);
                         }
                     }
                     if((curDomain==3)){
                         curDomain=3;
                         curLevel=GetLevel(offset);
                         if(curLevel==3){
-                            //Go
+                            new JSONTask().execute(baseAddress+right);
+                            new JSONTask().execute(baseAddress+right);
                         }
                         if(curLevel==2){
                             //Slower
+                            //new JSONTask().execute(baseAddress+"right");
                         }
                         if(curLevel==1){
                             //stop.
+                            new JSONTask().execute(baseAddress+stop);
+                            new JSONTask().execute(baseAddress+stop);
                         }
                     }
                     if((curDomain==4)){
@@ -156,12 +186,16 @@ public class MainActivity extends AppCompatActivity {
                         curLevel=GetLevel(offset);
                         if(curLevel==3){
                             //Go
+                            new JSONTask().execute(baseAddress+left);
+                            new JSONTask().execute(baseAddress+left);
                     }
                         if(curLevel==2){
                             //Slower
                         }
                         if(curLevel==1){
                             //stop.
+                            new JSONTask().execute(baseAddress+stop);
+                            new JSONTask().execute(baseAddress+stop);
                         }
                     }
                 }
@@ -172,8 +206,8 @@ public class MainActivity extends AppCompatActivity {
                 txtStick.setText("Degrees: "+0+"\nOffset: "+0);
                 curLevel=0;
                 curDomain=0;
-                new JSONTask().execute(baseAddress+"forward");
-                new JSONTask().execute(baseAddress+"forward");
+                new JSONTask().execute(baseAddress+stop);
+                new JSONTask().execute(baseAddress+stop);
                 System.out.println("Relased domain: "+curDomain);
             }
         });

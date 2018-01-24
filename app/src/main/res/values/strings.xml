@@ -14,5 +14,6 @@
     <string name="btnSend">SEND DATA</string>
     <string name="btnTest">Update List</string>
     <string name="btnSave">SAVE</string>
-    <string name="btnKitty">Kitty</string>
+    <string name="btnKitty"></string>
+    <string name="btnRestart">Reset</string>
 </resources>

@@ -18,15 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 import java.io.IOError;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    public static String[] collectedAddresses = new String[7];
+
+    public String[] collectedAddresses;
     public static boolean isSaved;
     public Toast toast;
     EditText editIP;
@@ -83,13 +81,19 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent changeIntent = new Intent(getApplicationContext(), MainActivity.class);
                 try {
-                    if (collectedAddresses != null) {
-                        changeIntent.putExtra("Addresses", collectedAddresses);
+                    if (collectedAddresses!=null) {
+                        if(!IsNull(collectedAddresses)){
+                            changeIntent.putExtra("Addresses", collectedAddresses);
+                            startActivity(changeIntent);
+                        }
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Contents were null, try saving and loading before sending to the next activity!",Toast.LENGTH_LONG).show();
                     }
                 } catch (IOError error) {
                     System.out.println("Error has occurred.");
                 }
-                startActivity(changeIntent);
+
             }
         });
         btnLoad.setOnClickListener(new View.OnClickListener() {
@@ -112,10 +116,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
-
     public boolean IsNull(String[] dataArray) {
         for (int i = 0; i < dataArray.length; i++) {
-            if (dataArray[i].length() == 0 || dataArray[i] == null) {
+            if (dataArray[i].length() == 0 || dataArray[i] == null||dataArray[i].isEmpty()) {
                 return true;
             }
         }

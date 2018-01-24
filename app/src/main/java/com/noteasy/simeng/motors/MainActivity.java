@@ -24,22 +24,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
     private TextView urlText;
     public String [] addresses;
-    public static String baseAddress="http://10.145.145.140:5000/";//"http://10.145.158.52:1234/";
-    float degrees;
-    boolean forwardDomain=degrees<=135&&degrees>=45; //set all domains of the joystick.
-    boolean backwardDomain=degrees<-45&&degrees>-135;
-    boolean rightDomain=degrees<45&&degrees>-45;
-    boolean leftDomain=degrees<135&&degrees>-135;
+    //public static String baseAddress="http://10.145.145.140:5000/";
+    //public static String baseAddress="http://10.145.158.52:1234/";
+    public String baseAddress="http://192.168.0.100:1234/";
     float offSetMax=0.75f;
     float offSetMid=0.5f;
     float offSetLow=0.25f;
-    public static float lastOffset;
-    public static float lastDegree;
     public static int curLevel;
     public static int curDomain=0;
     public int GetLevel(float offSet){
@@ -88,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         //Change to other activity
         if(getIntent().hasExtra("Addresses")){
             addresses=getIntent().getExtras().getStringArray("Addresses");
+            if (addresses[0]==null||addresses[0]=="null"){
+                Toast.makeText(getApplicationContext(),"Address IS NULL!!!!!!! Reenter and Save Properly",Toast.LENGTH_SHORT).show();
+            }
             System.out.println(addresses[0]+"is your base addresss");
             urlText.setText("Base address="+ addresses[0]);
             baseAddress=addresses[0];
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         buggoStick.setJoystickListener(new JoystickListener() {
             @Override
             public void onDown() {
-                //new JSONTask().execute("http://192.168.0.107:1234/stop");
+                //Events for on down.
             }
             @Override
             public void onDrag(float degrees, float offset) {
@@ -111,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(GetDomain(degrees));
                 boolean changed=GetLevel(offset)!=curLevel;
                 boolean domainChanged=GetDomain(degrees)!=curDomain;
-                DecimalFormat df=new DecimalFormat("#.00");
-                String formattedOffset=df.format(offset*100);
                 if(changed||domainChanged){
                     curDomain=GetDomain(degrees);
                     if(curDomain==1){
@@ -127,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(curLevel==1){
                             //stop.
-                            //new JSONTask().execute(baseAddress+"forward/"+formattedOffset);
+                            new JSONTask().execute(baseAddress+"stop");
                         }
                     }
                     if((curDomain==2)){
@@ -177,10 +172,9 @@ public class MainActivity extends AppCompatActivity {
                 txtStick.setText("Degrees: "+0+"\nOffset: "+0);
                 curLevel=0;
                 curDomain=0;
-                new JSONTask().execute(baseAddress+"forward/");
-                new JSONTask().execute(baseAddress+"forward/");
+                new JSONTask().execute(baseAddress+"forward");
+                new JSONTask().execute(baseAddress+"forward");
                 System.out.println("Relased domain: "+curDomain);
-                System.out.println("Current Offset: "+0+" Saved Offset: "+lastOffset+" Current Degree: "+0+" Saved Degree: "+lastDegree);
             }
         });
     }

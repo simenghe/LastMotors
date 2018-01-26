@@ -77,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent changeIntent = new Intent(getApplicationContext(), MainActivity.class);
-                try {
+              /*  try {
                     if (collectedAddresses!=null) {
                         if(!IsNull(collectedAddresses)){
                             changeIntent.putExtra("Addresses", collectedAddresses);
@@ -89,7 +89,8 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 } catch (IOError error) {
                     System.out.println("Error has occurred.");
-                }
+                }*/
+              startActivity(changeIntent);
             }
         });
         btnLoad.setOnClickListener(new View.OnClickListener() {

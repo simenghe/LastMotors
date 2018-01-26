@@ -28,7 +28,8 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private TextView urlText;
     public String [] addresses;
-    public String baseAddress="http://10.145.145.140:5000";
+    //public String baseAddress="http://10.145.145.140:5000";
+    public String baseAddress="http://192.168.0.109:1234";
     public String forward="/forward";
     public String backward="/backward";
     public String right="/right";
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 recreate();
+
             }
         });
 

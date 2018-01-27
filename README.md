@@ -1,2 +1,2 @@
 # LastMotors
-Motor app
+Motor app that accesses web addresses.

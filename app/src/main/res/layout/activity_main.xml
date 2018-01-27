@@ -5,9 +5,10 @@
     android:id="@+id/linearBase"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
 
     android:baselineAligned="false"
+    tools:background="@mipmap/gradient"
+    android:background="@mipmap/gradient"
     tools:context="com.noteasy.simeng.motors.MainActivity">
 
 
@@ -26,6 +27,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Returns:"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/buggoStick"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +94,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
+            app:layout_constraintTop_toBottomOf="@+id/btnSettings"
+            app:layout_constraintVertical_bias="0.93" />
+
+        <Button
+            android:id="@+id/btnKitty"
+            android:layout_width="141dp"
+            android:layout_height="85dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_kitty"
+            android:text="@string/btnKitty"
+            app:layout_constraintBottom_toTopOf="@+id/urlText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.89"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSettings"
+            app:layout_constraintVertical_bias="0.528" />
+
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

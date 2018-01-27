@@ -8,7 +8,7 @@
     <string name="editRight">/right</string>
     <string name="editLeft">/left</string>
     <string name="editHand">/hands</string>
-    <string name="editExtra">/extra</string>
+    <string name="editExtra">/slow</string>
     <string name="txtStick">Returns:</string>
     <string name="urlText">urlText</string>
     <string name="btnSend">SEND DATA</string>
@@ -16,4 +16,5 @@
     <string name="btnSave">SAVE</string>
     <string name="btnKitty"></string>
     <string name="btnRestart">Reset</string>
+    <string name="btnLoad">Load</string>
 </resources>

@@ -2,21 +2,23 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LeftConstraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/legendtech"
     tools:context="com.noteasy.simeng.motors.SettingsActivity">
 
 
     <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="357dp"
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,9 +30,9 @@
             android:ems="10"
             android:hint="@string/editIP"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/background_dark"
-            android:textColorHighlight="@android:color/background_dark"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="218dp"
             tools:layout_editor_absoluteY="370dp" />
@@ -43,7 +45,10 @@
             android:layout_row="1"
             android:ems="10"
             android:hint="@string/editUp"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/black"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editDown"
@@ -53,7 +58,12 @@
             android:layout_row="2"
             android:ems="10"
             android:hint="@string/editDown"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/black"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="182dp" />
 
         <EditText
             android:id="@+id/editRight"
@@ -63,7 +73,10 @@
             android:layout_row="3"
             android:ems="10"
             android:hint="@string/editRight"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/black" />
 
         <EditText
             android:id="@+id/editLeft"
@@ -73,7 +86,10 @@
             android:layout_row="4"
             android:ems="10"
             android:hint="@string/editLeft"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editHand"
@@ -83,7 +99,10 @@
             android:layout_row="5"
             android:ems="10"
             android:hint="@string/editHand"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/black" />
 
         <EditText
             android:id="@+id/editExtra"
@@ -93,7 +112,10 @@
             android:layout_row="6"
             android:ems="10"
             android:hint="@string/editExtra"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <Button
             android:id="@+id/btnSend"
@@ -101,7 +123,23 @@
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="0"
-            android:text="SEND DATA" />
+            android:text="@string/btnSend" />
+
+        <Button
+            android:id="@+id/btnLoad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:text="@string/btnLoad" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:text="@string/btnSave" />
 
     </GridLayout>
 

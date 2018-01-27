@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     float offSetLow = 0.25f;
     public static int curLevel;
     public static int curDomain = 0;
-    public int GetLevel(float offSet) {
+    public int GetLevel(float offSet) { //Get which offset range the joystick is in.
         if (offSet > offSetMax) {
             return 3;
         }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             return 1;
         }
     }
-    public int GetDomain(float degrees) {
+    public int GetDomain(float degrees) { //get which quadrant not MATHMATICALLY CORRECT
         //Return 1=UP,2=DOWN,3=LEFT,4=RIGHT
         if (degrees <= 135 && degrees >= 45) {
             return 1;

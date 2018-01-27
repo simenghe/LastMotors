@@ -30,7 +30,7 @@
             android:ems="10"
             android:hint="@string/editIP"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white"
             android:textStyle="bold"
@@ -46,7 +46,7 @@
             android:ems="10"
             android:hint="@string/editUp"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/black"
             android:textColorHint="@android:color/white"
             />
@@ -60,9 +60,9 @@
             android:ems="10"
             android:hint="@string/editDown"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
-            android:textColorHighlight="@android:color/white"
-            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/black"
+            android:textColorHint="@android:color/white"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="182dp" />
 
@@ -75,9 +75,9 @@
             android:ems="10"
             android:hint="@string/editRight"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/white"
-            android:textColorHint="@android:color/black" />
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editLeft"
@@ -88,33 +88,45 @@
             android:ems="10"
             android:hint="@string/editLeft"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white" />
 
         <EditText
-            android:id="@+id/editHand"
+            android:id="@+id/editStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="5"
             android:ems="10"
+            android:hint="@string/editStop"
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white" />
+        <EditText
+            android:id="@+id/editHand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="6"
+            android:ems="10"
             android:hint="@string/editHand"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/white"
-            android:textColorHint="@android:color/black" />
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/editExtra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_row="6"
+            android:layout_row="7"
             android:ems="10"
             android:hint="@string/editExtra"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white" />
 

@@ -79,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
             return 4;
         }
     }
-    static RequestQueue mRequestQueue;
-    StringRequest sr;
+    RequestQueue mRequestQueue; //make the request queue.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnKitty = (Button) findViewById(R.id.btnKitty);
         final TextView txtStick = (TextView) findViewById(R.id.txtStick);
         Button btnSettings = (Button) findViewById(R.id.btnSettings);
-        Button btnJoy = (Button) findViewById(R.id.btnJoy);
-        final Joystick buggoStick = (Joystick) findViewById(R.id.buggoStick);
+        Button btnJoy = (Button) findViewById(R.id.btnJoy); //button for the joystick
+        final Joystick buggoStick = (Joystick) findViewById(R.id.buggoStick); //joystick object from the library
 
         Network network = new BasicNetwork(new HurlStack());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
@@ -109,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
             urlText.setText("Base address="+ addresses[0]);
             baseAddress=addresses[0];
             Toast.makeText(getApplicationContext(),"Base Address :"+baseAddress,Toast.LENGTH_SHORT).show();
-            forward=addresses[1]; backward=addresses[2];right=addresses[3];
+            forward=addresses[1]; backward=addresses[2];right=addresses[3];left=addresses[4]; stop=addresses[5] ;hands=addresses[6]; slow=addresses[7];
         }
         else{
             baseAddress="http://192.168.0.100:1234";
             Toast.makeText(getApplicationContext(),"Default Base Address :"+baseAddress,Toast.LENGTH_SHORT).show();
         }
 
-         final StringRequest stringRequest = new StringRequest(Request.Method.GET, baseAddress,
+         final StringRequest stringRequest = new StringRequest(Request.Method.GET, baseAddress+hands,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -127,14 +126,13 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Error boys", Toast.LENGTH_SHORT).show();
-                        System.out.println("Error boys");
+                        urlText.setText("Error has occurred, re enter addresses!");
                     }
                 });
         btnKitty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(baseAddress);
+                System.out.println(baseAddress+hands);
                 mRequestQueue.add(stringRequest);
             }
         });
@@ -148,102 +146,108 @@ public class MainActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onDrag(float degrees, float offset) {
-                    String newUrl="http://192.168.0.100:1234/";
+                    String newUrl=baseAddress;
                     txtStick.setText("Degrees: " + degrees + "\nOffset:  " + offset);
                     System.out.println(GetDomain(degrees));
                     boolean changed = GetLevel(offset) != curLevel;
                     boolean domainChanged = GetDomain(degrees) != curDomain;
-                    if (changed || domainChanged) {
+                    if (changed || domainChanged) { //any changes.
                         curDomain = GetDomain(degrees);
-                        if (curDomain == 1) {
+                        if (curDomain == 1) {//up domain
                             curLevel = GetLevel(offset);
                             curDomain = 1;
-                            if (curLevel == 3) {
+                            if (curLevel == 3) { //full force
                                 newUrl+=forward;
                             }
                             if (curLevel == 2) {
-                                newUrl+=forward;
+                                newUrl+=forward+slow;
                             }
                             if (curLevel == 1) {
-                                newUrl+="lightoff";
+                                newUrl+=stop;
                             }
-                            StringRequest stringRequest = new StringRequest(Request.Method.GET, newUrl,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // Do something with the response
-                                            urlText.setText(response);
-                                        }
-                                    },
-                                    new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            Toast.makeText(getApplicationContext(), "Error boys", Toast.LENGTH_SHORT).show();
-                                            System.out.println("Error boys");
-                                        }
-                                    });
-                            mRequestQueue.add(stringRequest);
                         }
-                        if ((curDomain == 2)) {
+                        if ((curDomain == 2)) { //backwards
                             curDomain = 2;
                             curLevel = GetLevel(offset);
-                            if (curLevel == 3) {
+                            if (curLevel == 3) { //full force
+                                newUrl+=backward;
                             }
-                            if (curLevel == 2) {
+                            if (curLevel == 2) { //slower
+                                newUrl+=backward+slow;
                             }
-                            if (curLevel == 1) {
+                            if (curLevel == 1) { //stop
+                                newUrl+=stop;
                             }
                         }
-                        if ((curDomain == 3)) {
+                        if ((curDomain == 3)) { //right
                             curDomain = 3;
                             curLevel = GetLevel(offset);
-                            if (curLevel == 3) {
+                            if (curLevel == 3||curLevel==2) { //added sensitivity for turns since variable turns are not needed.
+                                newUrl+=right;
                             }
-                            if (curLevel == 2) {
-                                //Slower
-                                //new JSONTask().execute(baseAddress+"right");
-                            }
-                            if (curLevel == 1) {
-                                //stop.
+                            if (curLevel == 1) { //stop
+                                newUrl+=stop;
                             }
                         }
-                        if ((curDomain == 4)) {
+                        if ((curDomain == 4)) { //left
                             curDomain = 4;
                             curLevel = GetLevel(offset);
-                            if (curLevel == 3) {
-                                //Go
-                            }
-                            if (curLevel == 2) {
-                                //Slower
+                            if (curLevel == 3||curLevel == 2) { //mixed them up toghether so it would not send extra requests
+                                newUrl+=left;
                             }
                             if (curLevel == 1) {
-                                //stop.
+                                newUrl+=stop ;
                             }
                         }
+                        System.out.println(newUrl);
+                        StringRequest stringRequest = new StringRequest(Request.Method.GET, newUrl, //string request based on the string given.
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        // Do something with the response
+                                        urlText.setText(response);
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        urlText.setText("Error has occurred, re enter addresses!");
+                                    }
+                                });
+                        mRequestQueue.add(stringRequest); //add it tot he queue.
                     }
                 }
                 @Override
-                public void onUp() {
+                public void onUp() { //sends a stop
+                    String stopUrl=baseAddress+stop; //set up another string request method.
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, stopUrl,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Do something with the response
+                                    urlText.setText(response);
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    urlText.setText("Error has occurred, re enter addresses!");
+                                }
+                            });
+                    mRequestQueue.add(stringRequest);
                     txtStick.setText("Degrees: " + 0 + "\nOffset: " + 0);
                     curLevel = 0;
                     curDomain = 0;
-                    System.out.println("Relased domain: " + curDomain);
+                    System.out.println("Released domain: " + curDomain);
                 }
             });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
+        btnSettings.setOnClickListener(new View.OnClickListener() { //switch activity.
             @Override
             public void onClick(View view) { //changing activities.
                 Intent startIntent=new Intent(getApplicationContext(),SettingsActivity.class);
                 startActivity(startIntent);
             }
         });
-        }
-        private void sendRequest(){
-            mRequestQueue= Volley.newRequestQueue(this);
-
-
-
-
         }
     }
 

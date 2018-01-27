@@ -7,6 +7,7 @@
     <string name="editDown">/backwards</string>
     <string name="editRight">/right</string>
     <string name="editLeft">/left</string>
+    <string name="editStop">/stop</string>
     <string name="editHand">/hands</string>
     <string name="editExtra">/slow</string>
     <string name="txtStick">Returns:</string>

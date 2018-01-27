@@ -29,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button btnSave;
     Button btnLoad;
     public EditText[] addressEdits;
-    String[] defaultAddresses = new String[]{"http://192.168.0.107:1234", "/forward", "/backward", "/right", "/left", "/hands", "/slow"}; //make a list of default addresses if user hasn't entered anyhting
+    String[] defaultAddresses = new String[]{"http://192.168.0.107:1234", "/forward", "/backward", "/right", "/left","/stop", "/hands", "/slow"}; //make a list of default addresses if user hasn't entered anyhting
     String[] list; //my list of addresses
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         btnSave = (Button) findViewById(R.id.btnSave);
         btnLoad = (Button) findViewById(R.id.btnLoad);
         //Take from all the needed editTexts!
-        addressEdits = new EditText[]{findViewById(R.id.editIP), findViewById(R.id.editUp), findViewById(R.id.editDown), findViewById(R.id.editRight), findViewById(R.id.editLeft), findViewById(R.id.editHand), findViewById(R.id.editExtra)};
+        addressEdits = new EditText[]{findViewById(R.id.editIP), findViewById(R.id.editUp), findViewById(R.id.editDown), findViewById(R.id.editRight), findViewById(R.id.editLeft),findViewById(R.id.editStop), findViewById(R.id.editHand), findViewById(R.id.editExtra)};
         list = new String[addressEdits.length]; //declare the size
         btnSave.setOnClickListener(new View.OnClickListener() { //Save the profile into the file.
             @Override
